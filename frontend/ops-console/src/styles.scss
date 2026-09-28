@@ -1,0 +1,97 @@
+@use '@angular/material' as mat;
+
+$primary: mat.m2-define-palette(mat.$m2-indigo-palette, 700);
+$accent:  mat.m2-define-palette(mat.$m2-amber-palette, 600);
+$warn:    mat.m2-define-palette(mat.$m2-red-palette);
+
+$theme: mat.m2-define-light-theme((
+  color: (primary: $primary, accent: $accent, warn: $warn),
+  typography: mat.m2-define-typography-config($font-family: 'Inter, sans-serif'),
+  density: -1
+));
+
+@include mat.all-component-themes($theme);
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: #f5f6fa;
+  color: #1a1a2e;
+}
+
+// Utility classes
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  h1 { margin: 0; font-size: 1.5rem; font-weight: 600; }
+}
+
+.card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.08);
+  padding: 24px;
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.08);
+  .label { font-size: 0.75rem; color: #6b7280; text-transform: uppercase; letter-spacing: .05em; }
+  .value { font-size: 1.75rem; font-weight: 700; margin-top: 4px; }
+  .sub   { font-size: 0.8rem; color: #6b7280; margin-top: 2px; }
+  &.warn .value { color: #f59e0b; }
+  &.danger .value { color: #ef4444; }
+  &.ok .value { color: #10b981; }
+}
+
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  &.green  { background: #d1fae5; color: #065f46; }
+  &.yellow { background: #fef3c7; color: #92400e; }
+  &.red    { background: #fee2e2; color: #991b1b; }
+  &.blue   { background: #dbeafe; color: #1e40af; }
+  &.gray   { background: #f3f4f6; color: #374151; }
+}
+
+.mat-mdc-table { width: 100%; }
+.clickable-row:hover { background: #f9fafb; cursor: pointer; }
+
+.confidence-bar {
+  height: 6px;
+  border-radius: 3px;
+  background: #e5e7eb;
+  .fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.3s;
+    &.high   { background: #10b981; }
+    &.medium { background: #f59e0b; }
+    &.low    { background: #ef4444; }
+  }
+}
+
+.loading-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px;
+}
+
+mat-paginator { margin-top: 8px; }
